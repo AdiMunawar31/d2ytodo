@@ -4,10 +4,13 @@
       <div class="col-lg-8 col-sm-11">
         <div class="row p-3 shadow my-3 d-flex justify-content-center">
           <div class="col-sm-11 col-lg-11 py-3">
-            <h4>Uncompleted Todo</h4>
+            <h4>Todo List</h4>
+
             <hr />
             <ul class="list-group">
               <li
+                v-for="(todo, index) in todos"
+                :key="todo"
                 class="
                   list-group-item
                   d-flex
@@ -15,21 +18,78 @@
                   align-items-center
                 "
               >
-                A list item
+                <span v-if="todo.isDone">
+                  <i class="bi bi-check-square-fill text-success me-3"></i>
+                  <del>{{
+                    todo.acticity ? todo.acticity : "Data Not Found!"
+                  }}</del>
+                </span>
+                <span v-else>{{
+                  todo.acticity ? todo.acticity : "Data Not Found!"
+                }}</span>
+
                 <div class="d-flex">
-                  <button class="btn btn-sm btn-primary rounded-pill shadow">
-                    <i class="bi bi-check-circle"></i>
-                  </button>
+                  <div v-if="todo.isDone">
+                    <button
+                      @click="done(index)"
+                      class="btn btn-sm btn-warning rounded-pill shadow"
+                    >
+                      <i class="bi bi-arrow-repeat"></i>
+                    </button>
+                  </div>
+
+                  <div v-else>
+                    <button
+                      @click="done(index)"
+                      class="btn btn-sm btn-primary rounded-pill shadow"
+                    >
+                      <i class="bi bi-check-lg"></i>
+                    </button>
+                  </div>
+
                   <div class="mx-1"></div>
-                  <button class="btn btn-sm btn-danger rounded-pill shadow">
+                  <button
+                    @click="del(index)"
+                    class="btn btn-sm btn-danger rounded-pill shadow"
+                  >
                     <i class="bi bi-trash"></i>
                   </button>
                 </div>
               </li>
             </ul>
+            <hr />
+            <p>
+              Total Todo : <span class="badge bg-primary">{{ total }}</span>
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+
+<script>
+export default {
+  props: {
+    todos: {
+      type: Array,
+      default: [],
+    },
+  },
+  methods: {
+    del(index) {
+      this.$emit("del", index);
+    },
+    done(index) {
+      this.$emit("done", index);
+    },
+  },
+
+  computed: {
+    total() {
+      return this.todos.length;
+    },
+  },
+};
+</script>
