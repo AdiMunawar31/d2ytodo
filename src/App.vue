@@ -39,7 +39,7 @@ export default {
       todos: [],
     };
   },
-  mounted() {
+  created() {
     this.todos = JSON.parse(localStorage.getItem("D2YTODO"));
   },
   methods: {
