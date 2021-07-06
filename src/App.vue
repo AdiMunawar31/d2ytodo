@@ -39,9 +39,9 @@ export default {
       todos: [],
     };
   },
- // mounted() {
- //   this.todos = JSON.parse(localStorage.getItem("D2YTODO"));
- // },
+  mounted() {
+    this.todos = JSON.parse(localStorage.getItem("D2YTODO"));
+  },
   methods: {
     add() {
       this.todos.unshift({ acticity: this.todo, isDone: false });
