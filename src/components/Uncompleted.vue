@@ -57,10 +57,6 @@
                 </div>
               </li>
             </ul>
-            <hr />
-            <p>
-              Total Todo : <span class="badge bg-primary">{{ total }}</span>
-            </p>
           </div>
         </div>
       </div>
@@ -83,12 +79,6 @@ export default {
     },
     done(index) {
       this.$emit("done", index);
-    },
-  },
-
-  computed: {
-    total() {
-      return this.todos.length;
     },
   },
 };
