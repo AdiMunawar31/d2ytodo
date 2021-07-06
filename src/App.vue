@@ -39,9 +39,7 @@ export default {
       todos: [],
     };
   },
-  created() {
-    this.todos = JSON.parse(localStorage.getItem("D2YTODO"));
-  },
+
   methods: {
     add() {
       this.todos.unshift({ acticity: this.todo, isDone: false });
@@ -69,6 +67,10 @@ export default {
     saveData() {
       localStorage.setItem("D2YTODO", JSON.stringify(this.todos));
     },
+  },
+
+  created() {
+    this.todos = JSON.parse(localStorage.getItem("D2YTODO"));
   },
 };
 </script>
